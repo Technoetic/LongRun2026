@@ -312,7 +312,6 @@ SCROLL PROGRESS BAR
       line-height: 1;
       color: var(--white);
     }
-    .hero-stat-num--prog { color: var(--status-prog); }
     .hero-stat-label {
       font-size: 0.75rem;
       font-weight: 500;
@@ -1232,10 +1231,6 @@ FADE-IN ANIMATION UTILITY
 
       <div class="hero-stats" id="hero-stats">
         <div class="hero-stat">
-          <span class="hero-stat-num hero-stat-num--prog" id="hero-stat-prog">0</span>
-          <span class="hero-stat-label">진행중<br>마일스톤</span>
-        </div>
-        <div class="hero-stat">
           <span class="hero-stat-num" id="hero-stat-total" style="color:rgba(255,255,255,0.7)">15</span>
           <span class="hero-stat-label">전체<br>마일스톤</span>
         </div>
@@ -1616,9 +1611,6 @@ function buildPhase(phase) {
 /* ─── BUILD DASHBOARD ─────────────────────────────────────── */
 function buildDashboard(allMilestones) {
 	var total = allMilestones.length;
-	var prog = allMilestones.filter(function (m) {
-		return resolveStatus(m) === "prog";
-	}).length;
 	var pend = allMilestones.filter(function (m) {
 		return resolveStatus(m) === "pend";
 	}).length;
@@ -1795,13 +1787,8 @@ function buildDashboard(allMilestones) {
 
 /* ─── HERO STATS ──────────────────────────────────────────── */
 function updateHeroStats(allMilestones) {
-	var prog = allMilestones.filter(function (m) {
-		return resolveStatus(m) === "prog";
-	}).length;
 	var total = allMilestones.length;
-	var progEl = document.getElementById("hero-stat-prog");
 	var totalEl = document.getElementById("hero-stat-total");
-	if (progEl) progEl.textContent = prog;
 	if (totalEl) totalEl.textContent = total;
 }
 
